@@ -1,11 +1,9 @@
-import { Button } from '@/components/ui/button';
+import Navbar from '@/components/Navbar';
 
 export default function Home() {
   return (
     <main className="min-h-screen">
-      <div className="flex items-center gap-x-2">
-        Hello World! <Button>Shadcn Button</Button>
-      </div>
+      <Navbar />
     </main>
   );
 }
