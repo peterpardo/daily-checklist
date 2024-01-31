@@ -11,16 +11,15 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { FolderPlus } from 'lucide-react';
-import React from 'react';
 
 export default function AddCollectionDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-x-2 rounded cursor-pointer text-xs py-2 px-4 w-max transition ease-in hover:bg-accent">
-          <FolderPlus size={20} />
-          <span>New Collection</span>
-        </div>
+        <Button variant="secondary">
+          <FolderPlus size={20} className="mr-2" />
+          <span className="text-xs md:text-base">New Collection</span>
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>

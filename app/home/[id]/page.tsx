@@ -7,6 +7,9 @@ import {
 import { Separator } from '@/components/ui/separator';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Pencil, Trash2 } from 'lucide-react';
+import { DeleteTaskDialog } from '@/components/DeleteTaskDialog';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 
 export default function CollectionPage({ params }: { params: { id: string } }) {
   return (
@@ -35,12 +38,12 @@ export default function CollectionPage({ params }: { params: { id: string } }) {
               </CardHeader>
 
               <div className="flex items-center ml-auto mt-1">
-                <div className="hover:bg-accent p-2 rounded cursor-pointer">
-                  <Pencil size={20} />
-                </div>
-                <div className="hover:bg-accent p-2 rounded cursor-pointer">
-                  <Trash2 size={20} />
-                </div>
+                <Button variant="ghost" size="icon" asChild>
+                  <Link href={`/home/1`}>
+                    <Pencil size={16} />
+                  </Link>
+                </Button>
+                <DeleteTaskDialog />
               </div>
             </div>
           </Card>
