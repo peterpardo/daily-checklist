@@ -1,15 +1,12 @@
+import AddCollectionDialog from '@/components/AddCollectionDialog';
 import HomeCard from '@/components/HomeCard';
-import { FolderPlus } from 'lucide-react';
 
 export default function HomePage() {
   return (
     <div className="space-y-5">
       <div className="flex flex-col gap-y-3 items-start md:flex-row justify-between">
         <h1 className="font-bold text-4xl">Your Space</h1>
-        <div className="flex items-center gap-x-2 rounded cursor-pointer text-sm py-2 px-4 w-max transition ease-in hover:bg-accent">
-          <FolderPlus size={20} />
-          New Collection
-        </div>
+        <AddCollectionDialog />
       </div>
 
       <p className="text-sm max-w-[50rem]">
