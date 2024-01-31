@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -11,7 +10,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Copy, FolderPlus } from 'lucide-react';
+import { FolderPlus } from 'lucide-react';
 import React from 'react';
 
 export default function AddCollectionDialog() {
