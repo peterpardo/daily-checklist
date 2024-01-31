@@ -17,9 +17,9 @@ export default function AddCollectionDialog() {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex items-center gap-x-2 rounded cursor-pointer text-sm py-2 px-4 w-max transition ease-in hover:bg-accent">
+        <div className="flex items-center gap-x-2 rounded cursor-pointer text-xs py-2 px-4 w-max transition ease-in hover:bg-accent">
           <FolderPlus size={20} />
-          New Collection
+          <span>New Collection</span>
         </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">

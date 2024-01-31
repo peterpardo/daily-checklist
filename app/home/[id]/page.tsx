@@ -12,14 +12,12 @@ export default function CollectionPage({ params }: { params: { id: string } }) {
   return (
     <div className="space-y-5">
       <div className="flex gap-y-3 items-center justify-between">
-        <h1 className="font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-          Monday Tasks
-        </h1>
+        <h1 className="font-bold text-xl md:text-4xl">Monday Tasks</h1>
       </div>
 
       <div className="max-w-[40rem] space-y-5">
         <div>
-          <h1 className="text-2xl font-semibold">To do</h1>
+          <h1 className="text-lg font-semibold md:text-3xl">To do</h1>
           <Separator />
         </div>
 
@@ -49,9 +47,9 @@ export default function CollectionPage({ params }: { params: { id: string } }) {
         </div>
 
         <div>
-          <h1 className="text-2xl font-semibold">Completed</h1>
+          <h1 className="text-lg font-semibold md:text-3xl">Completed</h1>
           <Separator />
-          <div className='text-center mt-3'>
+          <div className="text-center mt-3">
             <p>No completed tasks yet</p>
           </div>
         </div>
