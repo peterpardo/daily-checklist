@@ -32,7 +32,6 @@ export default function NavbarMenu() {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem>Settings</DropdownMenuItem>
         <DropdownMenuItem onClick={() => signOut(() => router.push('/'))}>
           Logout
         </DropdownMenuItem>
