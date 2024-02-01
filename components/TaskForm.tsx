@@ -37,9 +37,9 @@ export default function TaskForm() {
   };
 
   const handleAddInput = () => {
+    let currentInputFields = [...inputFields];
     if (inputFields[inputFields.length - 1].title.value === '') {
       console.log('Last task title is empty...');
-      let currentInputFields = [...inputFields];
       let lastInputFieldIndex =
         currentInputFields.length === 1
           ? 0
@@ -54,8 +54,20 @@ export default function TaskForm() {
       return;
     }
 
-    setInputFields((prevState) => [
-      ...prevState,
+    const mapInputFields = currentInputFields.map((item) => {
+      if (item.title.error !== '') {
+        item.title.error = '';
+      }
+
+      if (item.description.error !== '') {
+        item.description.error = '';
+      }
+
+      return item;
+    });
+
+    setInputFields([
+      ...mapInputFields,
       {
         title: {
           value: '',
