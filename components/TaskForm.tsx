@@ -12,20 +12,18 @@ export type TaskInputField = {
   };
 };
 
-const initialTaskInputState = {
-  title: {
-    value: '',
-    error: '',
-  },
-  description: {
-    value: '',
-    error: '',
-  },
-};
-
 export default function TaskForm() {
   const [inputFields, setInputFields] = useState<TaskInputField[]>([
-    { ...initialTaskInputState },
+    {
+      title: {
+        value: '',
+        error: '',
+      },
+      description: {
+        value: '',
+        error: '',
+      },
+    },
   ]);
 
   const handleChange = (
@@ -43,7 +41,11 @@ export default function TaskForm() {
       console.log('Last task title is empty...');
       let currentInputFields = [...inputFields];
       let lastInputFieldIndex =
-        currentInputFields.length === 1 ? 0 : currentInputFields.length - 2;
+        currentInputFields.length === 1
+          ? 0
+          : currentInputFields.length === 2
+          ? 1
+          : currentInputFields.length - 1;
 
       currentInputFields[lastInputFieldIndex].title.error =
         'Task title is required';
@@ -52,7 +54,19 @@ export default function TaskForm() {
       return;
     }
 
-    setInputFields((prevState) => [...prevState, { ...initialTaskInputState }]);
+    setInputFields((prevState) => [
+      ...prevState,
+      {
+        title: {
+          value: '',
+          error: '',
+        },
+        description: {
+          value: '',
+          error: '',
+        },
+      },
+    ]);
   };
 
   return (
