@@ -1,6 +1,9 @@
 import { Separator } from '@/components/ui/separator';
 import TaskCard from '@/components/TaskCard';
 import taskData from '@/tasksData.json';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { Plus } from 'lucide-react';
 
 export default function CollectionPage({ params }: { params: { id: string } }) {
   const completedTasks = taskData.filter((task) => task.completed);
@@ -10,6 +13,12 @@ export default function CollectionPage({ params }: { params: { id: string } }) {
     <div className="space-y-5">
       <div className="flex gap-y-3 items-center justify-between">
         <h1 className="font-bold text-xl md:text-4xl">Monday Tasks</h1>
+        <Button variant="secondary" asChild>
+          <Link href={`/home/${params.id}/create`}>
+            <Plus size={20} className="mr-2" />
+            <span className="text-xs md:text-base">Add Task</span>
+          </Link>
+        </Button>
       </div>
 
       <div className="max-w-[40rem] space-y-5">
