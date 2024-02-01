@@ -1,20 +1,33 @@
-import { Button } from '@/components/ui/button';
+'use client';
+
+import { TaskInputField } from '@/components/TaskForm';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Plus } from 'lucide-react';
 
 type TaskInputFieldsProps = {
-  showAddButton: boolean;
+  item: TaskInputField;
+  index: number;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>, index: number) => void;
 };
 
 export default function TaskInputFields({
-  showAddButton,
+  item,
+  index,
+  onChange,
 }: TaskInputFieldsProps) {
   return (
-    <div className="flex flex-col items-end justify-between gap-y-2 py-5">
+    <div className="flex flex-col items-end justify-between gap-y-3 py-5">
       <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="title">Title</Label>
-        <Input type="title" id="title" placeholder="Title" />
+        <Input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Task title here..."
+          value={item.title.value}
+          onChange={(event) => onChange(event, index)}
+        />
+        <span className="text-red-600">{item.title.error}</span>
       </div>
       <div className="grid w-full items-center gap-1.5">
         <Label htmlFor="description">
@@ -24,17 +37,17 @@ export default function TaskInputFields({
             (Optional)
           </span>
         </Label>
-        <Input type="description" id="description" placeholder="Description" />
+        <Input
+          type="text"
+          id="description"
+          title="description"
+          name="description"
+          placeholder="Task description here..."
+          value={item.description.value}
+          onChange={(event) => onChange(event, index)}
+        />
+        <span className="text-red-600">{item.description.error}</span>
       </div>
-      {showAddButton ? (
-        <div className="w-full">
-          <Button size="icon" className="w-full">
-            <Plus size={30} />
-          </Button>
-        </div>
-      ) : (
-        <div className="w-20"></div>
-      )}
     </div>
   );
 }
