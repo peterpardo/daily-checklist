@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "title": "Task 1",
+    "description": "Complete task 1",
+    "completed": false,
+    "collectionId": "4f96519e-887f-4a01-9b49-84f85a3b618b"
+  },
+  {
+    "id": 2,
+    "title": "Task 2",
+    "description": "Finish task 2",
+    "completed": true,
+    "collectionId": "63e0c0fe-2d39-4a7e-8b60-fc7d56db4c4a"
+  },
+  {
+    "id": 3,
+    "title": "Task 3",
+    "description": "Implement task 3 functionality",
+    "completed": false,
+    "collectionId": "7a4d93f0-4e18-4c7a-b76a-1fe54b9f8d3b"
+  }
+]
