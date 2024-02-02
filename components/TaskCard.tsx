@@ -1,6 +1,7 @@
 'use client';
 
 import { DeleteTaskDialog } from '@/components/DeleteTaskDialog';
+import TaskDialog from '@/components/TaskDialog';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -44,11 +45,7 @@ export default function TaskCard({ task, onChange }: TaskCardProps) {
         </CardHeader>
 
         <div className="flex items-center ml-auto mt-1">
-          <Button variant="ghost" size="icon" asChild>
-            <Link href={`/home/1`}>
-              <Pencil size={16} />
-            </Link>
-          </Button>
+          {!task.completed && <TaskDialog data={task} action="EDIT" />}
           <DeleteTaskDialog />
         </div>
       </div>

@@ -13,7 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Task } from '@/types';
-import { Plus } from 'lucide-react';
+import { Pencil, Plus } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -48,6 +48,7 @@ export default function TaskDialog({
       description: data?.description ?? '',
     },
   });
+  const isCreate = action === 'CREATE';
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -56,17 +57,24 @@ export default function TaskDialog({
   return (
     <Dialog onOpenChange={(_) => form.reset()}>
       <DialogTrigger asChild>
-        <Button variant="secondary">
-          <Plus size={20} className="mr-2" />
-          <span className="text-xs md:text-base">Add Task</span>
-        </Button>
+        {isCreate ? (
+          <Button variant="secondary">
+            <Plus size={20} className="mr-2" />
+            <span className="text-xs md:text-base">Add Task</span>
+          </Button>
+        ) : (
+          <Button variant="ghost" size="icon">
+            <Pencil size={16} />
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>Create a Task</DialogTitle>
+          <DialogTitle>{isCreate ? 'Create a Task' : 'Edit Task'}</DialogTitle>
           <DialogDescription>
-            Type in the title of your task and you can add description if you
-            want.
+            {isCreate
+              ? 'Type in the title of your task and you can add description if you want.'
+              : 'Make an update on the task that you selected.'}
           </DialogDescription>
         </DialogHeader>
         <Form {...form}>
@@ -107,7 +115,7 @@ export default function TaskDialog({
             />
 
             <DialogFooter className="mt-2">
-              <Button type="submit">Add</Button>
+              <Button type="submit">{isCreate ? 'Add' : 'Edit'}</Button>
             </DialogFooter>
           </form>
         </Form>
