@@ -1,3 +1,5 @@
+'use client';
+
 import { DeleteTaskDialog } from '@/components/DeleteTaskDialog';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,22 +12,34 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Task } from '@/types';
 import { Pencil } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import { useState } from 'react';
 
 type TaskCardProps = {
   task: Task;
+  onChange: (value: boolean, id: number) => void;
 };
 
-export default function TaskCard({ task }: TaskCardProps) {
+export default function TaskCard({ task, onChange }: TaskCardProps) {
   return (
     <Card>
       <div className="flex items-start p-2">
         <div className="pl-2 pr-2 pt-3">
-          <Checkbox checked={task.completed} />
+          <Checkbox
+            checked={task.completed}
+            onCheckedChange={(value: boolean) => onChange(value, task.id)}
+          />
         </div>
         <CardHeader className="p-2">
-          <CardTitle className="text-lg">{task.title}</CardTitle>
-          <CardDescription className="text-xs md:text-sm">
+          <CardTitle
+            className={`text-lg ${task.completed ? 'line-through' : ''}`}
+          >
+            {task.title}
+          </CardTitle>
+          <CardDescription
+            className={`text-xs md:text-sm  ${
+              task.completed ? 'line-through' : ''
+            }`}
+          >
             {task.description}
           </CardDescription>
         </CardHeader>
