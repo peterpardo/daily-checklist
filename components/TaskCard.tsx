@@ -12,7 +12,6 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Task } from '@/types';
 import { Pencil } from 'lucide-react';
 import Link from 'next/link';
-import { useState } from 'react';
 
 type TaskCardProps = {
   task: Task;
