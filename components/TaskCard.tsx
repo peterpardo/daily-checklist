@@ -2,7 +2,6 @@
 
 import { DeleteTaskDialog } from '@/components/DeleteTaskDialog';
 import TaskDialog from '@/components/TaskDialog';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardDescription,
@@ -11,8 +10,6 @@ import {
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Task } from '@/types';
-import { Pencil } from 'lucide-react';
-import Link from 'next/link';
 
 type TaskCardProps = {
   task: Task;
