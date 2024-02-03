@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Task } from '@/types';
-import { Pencil, Plus } from 'lucide-react';
+import { Loader2, Pencil, Plus } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
@@ -24,6 +24,8 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { useToast } from '@/components/ui/use-toast';
+import { useState } from 'react';
 
 type TaskDialogProps = {
   action?: 'CREATE' | 'EDIT';
@@ -46,14 +48,37 @@ export default function TaskDialog({
       description: data?.description ?? '',
     },
   });
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
   const isCreate = action === 'CREATE';
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+
+    await (async () => {
+      return new Promise((resolve, reject) =>
+        setTimeout(() => resolve('resolved'), 1000),
+      );
+    })();
+
     console.log(values);
+
+    toast({
+      title: 'Task successfully added.',
+    });
+    setIsOpen(false);
+    setIsLoading(false);
   }
 
   return (
-    <Dialog onOpenChange={(_) => form.reset()}>
+    <Dialog
+      onOpenChange={(value) => {
+        form.reset();
+        setIsOpen(value);
+      }}
+      open={isOpen}
+    >
       <DialogTrigger asChild>
         {isCreate ? (
           <Button variant="secondary">
@@ -113,7 +138,10 @@ export default function TaskDialog({
             />
 
             <DialogFooter className="mt-2">
-              <Button type="submit">{isCreate ? 'Add' : 'Edit'}</Button>
+              <Button type="submit" disabled={isLoading}>
+                {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                {isCreate ? 'Add' : 'Edit'}
+              </Button>
             </DialogFooter>
           </form>
         </Form>
