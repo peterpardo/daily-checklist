@@ -71,14 +71,15 @@ export default function TaskDialog({
     setIsLoading(false);
   }
 
+  function handleDialogChange(open: boolean) {
+    if (!open) {
+      form.reset();
+    }
+    setIsOpen(open);
+  }
+
   return (
-    <Dialog
-      onOpenChange={(value) => {
-        form.reset();
-        setIsOpen(value);
-      }}
-      open={isOpen}
-    >
+    <Dialog onOpenChange={handleDialogChange} open={isOpen}>
       <DialogTrigger asChild>
         {isCreate ? (
           <Button variant="secondary">

@@ -13,8 +13,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FolderPlus, Loader2 } from 'lucide-react';
-import { useState } from 'react';
+import { FolderPlus, Loader2, Pencil } from 'lucide-react';
+import React, { Ref, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import {
@@ -25,21 +25,31 @@ import {
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+
+type CollectionDialogProps = {
+  action?: 'CREATE' | 'EDIT';
+  data?: string | null;
+};
 
 const formSchema = z.object({
   name: z.string().min(2).max(20),
 });
 
-export default function CollectionDialog() {
+export default React.forwardRef(function CollectionDialog(
+  { action = 'CREATE', data }: CollectionDialogProps,
+  ref: Ref<HTMLDivElement>,
+) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: '',
+      name: data ?? '',
     },
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
+  const isCreate = action === 'CREATE';
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -59,19 +69,38 @@ export default function CollectionDialog() {
     setIsLoading(false);
   }
 
+  function handleDialogChange(open: boolean) {
+    if (!open) {
+      form.reset();
+    }
+    setIsOpen(open);
+  }
+
   return (
-    <Dialog
-      onOpenChange={(value) => {
-        form.reset();
-        setIsOpen(value);
-      }}
-      open={isOpen}
-    >
+    <Dialog onOpenChange={handleDialogChange} open={isOpen}>
       <DialogTrigger asChild>
-        <Button variant="secondary">
-          <FolderPlus size={20} className="mr-2" />
-          <span className="text-xs md:text-base">New Collection</span>
-        </Button>
+        {isCreate ? (
+          <Button variant="secondary">
+            <FolderPlus size={20} className="mr-2" />
+            <span className="text-xs md:text-base">New Collection</span>
+          </Button>
+        ) : (
+          <DropdownMenuItem
+            asChild
+            ref={ref}
+            onSelect={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <Button
+              variant="ghost"
+              className="w-full justify-start py-1.5 px-2"
+            >
+              <Pencil className="mr-2 h-4 w-4" />
+              <span>Edit</span>
+            </Button>
+          </DropdownMenuItem>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
@@ -114,4 +143,4 @@ export default function CollectionDialog() {
       </DialogContent>
     </Dialog>
   );
-}
+});

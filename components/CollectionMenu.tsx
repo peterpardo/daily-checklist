@@ -1,12 +1,12 @@
+import CollectionDialog from '@/components/CollectionDialog';
 import DeleteCollectionDialog from '@/components/DeleteCollectionDialog';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { MoreHorizontal, Pencil } from 'lucide-react';
+import { MoreHorizontal } from 'lucide-react';
 
 export default function CollectionMenu() {
   return (
@@ -17,12 +17,7 @@ export default function CollectionMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40">
-        <DropdownMenuItem asChild>
-          <Button variant="ghost" className="w-full justify-start py-1.5 px-2">
-            <Pencil className="mr-2 h-4 w-4" />
-            <span>Edit</span>
-          </Button>
-        </DropdownMenuItem>
+        <CollectionDialog action="EDIT" data="collection name" />
         <DeleteCollectionDialog />
       </DropdownMenuContent>
     </DropdownMenu>
