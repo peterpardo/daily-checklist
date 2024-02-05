@@ -1,4 +1,4 @@
-import AddCollectionDialog from '@/components/AddCollectionDialog';
+import CollectionDialog from '@/components/CollectionDialog';
 import HomeCard from '@/components/HomeCard';
 
 export default function HomePage() {
@@ -6,7 +6,7 @@ export default function HomePage() {
     <div className="space-y-5">
       <div className="flex gap-y-3 items-center justify-between">
         <h1 className="font-bold text-2xl md:text-4xl">Your Space</h1>
-        <AddCollectionDialog />
+        <CollectionDialog />
       </div>
 
       <p className="text-xs max-w-[50rem] md:text-sm">

@@ -30,7 +30,7 @@ const formSchema = z.object({
   name: z.string().min(2).max(20),
 });
 
-export default function AddCollectionDialog() {
+export default function CollectionDialog() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
