@@ -55,9 +55,7 @@ export default React.forwardRef(function CollectionDialog(
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    const data = await createCollection(values);
-
-    console.log({ data });
+    await createCollection(values);
 
     toast({
       title: 'Collection successfully created.',

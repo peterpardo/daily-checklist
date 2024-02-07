@@ -8,11 +8,11 @@ import { CollectionWithTasks } from '@/types';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 
-type HomeCardProps = {
+type CollectionCardProps = {
   collection: CollectionWithTasks;
 };
 
-export default function HomeCard({ collection }: HomeCardProps) {
+export default function CollectionCard({ collection }: CollectionCardProps) {
   return (
     <Link href={`/home/1`}>
       <Card className="transition cursor-pointer hover:bg-accent">

@@ -1,5 +1,5 @@
 import CollectionDialog from '@/components/CollectionDialog';
-import HomeCard from '@/components/HomeCard';
+import CollectionCard from '@/components/CollectionCard';
 import prisma from '@/lib/db';
 import { currentUser } from '@clerk/nextjs';
 
@@ -29,7 +29,7 @@ export default async function HomePage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2">
         {collections.length > 0 ? (
           collections.map((collection) => (
-            <HomeCard key={collection.id} collection={collection} />
+            <CollectionCard key={collection.id} collection={collection} />
           ))
         ) : (
           <p>No collections created yet.</p>
