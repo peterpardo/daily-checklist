@@ -26,6 +26,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
+import { createCollection } from '@/actions/task';
 
 type CollectionDialogProps = {
   action?: 'CREATE' | 'EDIT';
@@ -54,17 +55,14 @@ export default React.forwardRef(function CollectionDialog(
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    await (async () => {
-      return new Promise((resolve, reject) =>
-        setTimeout(() => resolve('resolved'), 1000),
-      );
-    })();
+    const data = await createCollection(values);
 
-    console.log(values);
+    console.log({ data });
 
     toast({
       title: 'Collection successfully created.',
     });
+
     setIsOpen(false);
     setIsLoading(false);
   }
