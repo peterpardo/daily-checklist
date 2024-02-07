@@ -1,7 +1,6 @@
 import CollectionMenu from '@/components/CollectionMenu';
 import TaskDialog from '@/components/TaskDialog';
 import TaskList from '@/components/TaskList';
-import taskData from '@/tasksData.json';
 import prisma from '@/lib/db';
 import { currentUser } from '@clerk/nextjs';
 
@@ -11,7 +10,7 @@ export default async function CollectionPage({
   params: { id: string };
 }) {
   const user = await currentUser();
-  const collection = await prisma.collection.findMany({
+  const collection = await prisma.collection.findUnique({
     where: {
       id: parseInt(params.id),
       userId: user?.id as string,
@@ -31,7 +30,7 @@ export default async function CollectionPage({
         <TaskDialog />
       </div>
 
-      <TaskList data={taskData} />
+      <TaskList data={collection?.tasks} />
     </div>
   );
 }

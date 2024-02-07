@@ -14,7 +14,7 @@ type CollectionCardProps = {
 
 export default function CollectionCard({ collection }: CollectionCardProps) {
   return (
-    <Link href={`/home/1`}>
+    <Link href={`/home/${collection.id}`}>
       <Card className="transition cursor-pointer hover:bg-accent">
         <div className="flex items-center justify-between">
           <CardHeader>

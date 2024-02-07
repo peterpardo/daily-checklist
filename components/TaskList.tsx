@@ -2,26 +2,26 @@
 
 import { Separator } from '@/components/ui/separator';
 import TaskCard from '@/components/TaskCard';
-import { Task } from '@/types';
 import { useMemo, useState } from 'react';
+import { Task } from '@prisma/client';
 
 type TaskListProps = {
-  data: Task[];
+  data: Task[] | undefined;
 };
 
 export default function TaskList({ data }: TaskListProps) {
   const [tasks, setTasks] = useState(data);
   const completedTasks = useMemo(
-    () => tasks.filter((task) => task.completed),
+    () => tasks?.filter((task) => task.completed),
     [tasks],
   );
   const notCompletedTasks = useMemo(
-    () => tasks.filter((task) => !task.completed),
+    () => tasks?.filter((task) => !task.completed),
     [tasks],
   );
 
   const handleTaskStatusChange = (value: boolean, id: number) => {
-    const currentTasks = [...tasks];
+    const currentTasks = [...(tasks || [])];
     const updatedTask = currentTasks.find((task) => task.id === id);
     const oldTasks = currentTasks.filter((task) => task.id !== id);
 
@@ -39,8 +39,8 @@ export default function TaskList({ data }: TaskListProps) {
       <div className="mt-3 space-y-3">
         <h1 className="text-lg font-semibold md:text-3xl">To do</h1>
         <Separator />
-        {notCompletedTasks.length > 0 ? (
-          notCompletedTasks.map((task) => (
+        {notCompletedTasks && notCompletedTasks?.length > 0 ? (
+          notCompletedTasks?.map((task) => (
             <TaskCard
               key={task.id}
               task={task}
@@ -57,8 +57,8 @@ export default function TaskList({ data }: TaskListProps) {
       <div className="mt-3 space-y-3">
         <h1 className="text-lg font-semibold md:text-3xl">Completed</h1>
         <Separator />
-        {completedTasks.length > 0 ? (
-          completedTasks.map((task) => (
+        {completedTasks && completedTasks?.length > 0 ? (
+          completedTasks?.map((task) => (
             <TaskCard
               key={task.id}
               task={task}

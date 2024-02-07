@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Task } from '@/types';
+import { Task } from '@prisma/client';
 
 type TaskCardProps = {
   task: Task;

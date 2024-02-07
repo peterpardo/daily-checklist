@@ -11,7 +11,6 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
-import { Task } from '@/types';
 import { Loader2, Pencil, Plus } from 'lucide-react';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -26,6 +25,7 @@ import {
 } from '@/components/ui/form';
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
+import { Task } from '@prisma/client';
 
 type TaskDialogProps = {
   action?: 'CREATE' | 'EDIT';
@@ -62,8 +62,7 @@ export default function TaskDialog({
       );
     })();
 
-    console.log(values);
-
+ 
     toast({
       title: 'Task successfully added.',
     });
