@@ -24,7 +24,7 @@ export default async function CollectionPage({
     <div className="space-y-5">
       <div className="flex gap-y-3 items-center justify-between">
         <div className="flex items-center gap-x-3">
-          <h1 className="font-bold text-xl md:text-4xl">Monday Tasks</h1>
+          <h1 className="font-bold text-xl md:text-4xl">{collection?.name}</h1>
           <CollectionMenu collectionId={params.id} />
         </div>
         <TaskDialog />

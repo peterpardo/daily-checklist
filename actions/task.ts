@@ -20,3 +20,23 @@ export async function createCollection(values: { name: string }) {
 
   revalidatePath('/home');
 }
+
+export async function editCollection(
+  values: { name: string },
+  collectionId: number | undefined,
+) {
+  try {
+    await prisma.collection.update({
+      where: {
+        id: collectionId,
+      },
+      data: {
+        name: values.name,
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to create collection');
+  }
+
+  revalidatePath(`/home/${collectionId}`);
+}

@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { createCollection } from '@/actions/task';
+import { createCollection, editCollection } from '@/actions/task';
 import { Collection } from '@prisma/client';
 
 type CollectionDialogProps = {
@@ -62,7 +62,7 @@ export default React.forwardRef(function CollectionDialog(
       await createCollection(values);
       toastTitle = 'Collection successfully created.';
     } else {
-      await createCollection(values);
+      await editCollection(values, data?.id);
       toastTitle = 'Collection successfully edited.';
     }
 
@@ -140,7 +140,13 @@ export default React.forwardRef(function CollectionDialog(
             <DialogFooter>
               <Button type="submit" disabled={isLoading}>
                 {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                {isLoading ? 'Creating..' : 'Create'}
+                {action === 'CREATE'
+                  ? isLoading
+                    ? 'Creating...'
+                    : 'Create'
+                  : isLoading
+                  ? 'Editing...'
+                  : 'Edit'}
               </Button>
             </DialogFooter>
           </form>
