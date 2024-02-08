@@ -6,9 +6,22 @@ import {
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import prisma from '@/lib/db';
 import { MoreHorizontal } from 'lucide-react';
 
-export default function CollectionMenu() {
+type CollectionMenuProps = {
+  collectionId: string;
+};
+
+export default async function CollectionMenu({
+  collectionId,
+}: CollectionMenuProps) {
+  const collection = await prisma.collection.findUnique({
+    where: {
+      id: parseInt(collectionId),
+    },
+  });
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -17,7 +30,7 @@ export default function CollectionMenu() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40">
-        <CollectionDialog action="EDIT" data="collection name" />
+        <CollectionDialog action="EDIT" data={collection} />
         <DeleteCollectionDialog />
       </DropdownMenuContent>
     </DropdownMenu>

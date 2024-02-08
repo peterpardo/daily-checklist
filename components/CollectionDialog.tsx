@@ -27,10 +27,11 @@ import {
 } from '@/components/ui/form';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
 import { createCollection } from '@/actions/task';
+import { Collection } from '@prisma/client';
 
 type CollectionDialogProps = {
   action?: 'CREATE' | 'EDIT';
-  data?: string | null;
+  data?: Collection | null;
 };
 
 const formSchema = z.object({
@@ -44,7 +45,7 @@ export default React.forwardRef(function CollectionDialog(
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: data ?? '',
+      name: data?.name ?? '',
     },
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -55,10 +56,18 @@ export default React.forwardRef(function CollectionDialog(
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    await createCollection(values);
+    let toastTitle = '';
+
+    if (action === 'CREATE') {
+      await createCollection(values);
+      toastTitle = 'Collection successfully created.';
+    } else {
+      await createCollection(values);
+      toastTitle = 'Collection successfully edited.';
+    }
 
     toast({
-      title: 'Collection successfully created.',
+      title: toastTitle,
     });
 
     setIsOpen(false);
@@ -90,7 +99,7 @@ export default React.forwardRef(function CollectionDialog(
           >
             <Button
               variant="ghost"
-              className="w-full justify-start py-1.5 px-2"
+              className="w-full justify-start py-1.5 px-2 cursor-pointer"
             >
               <Pencil className="mr-2 h-4 w-4" />
               <span>Edit</span>
