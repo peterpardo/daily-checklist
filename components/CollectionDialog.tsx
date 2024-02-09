@@ -26,7 +26,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu';
-import { createCollection, editCollection } from '@/actions/task';
+import { createCollection, editCollection } from '@/actions/collection';
 import { Collection } from '@prisma/client';
 
 type CollectionDialogProps = {

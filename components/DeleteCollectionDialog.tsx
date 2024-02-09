@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteCollection } from '@/actions/task';
+import { deleteCollection } from '@/actions/collection';
 import {
   AlertDialog,
   AlertDialogAction,
