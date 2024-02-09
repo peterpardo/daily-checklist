@@ -31,7 +31,7 @@ export default async function CollectionMenu({
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-40">
         <CollectionDialog action="EDIT" data={collection} />
-        <DeleteCollectionDialog />
+        <DeleteCollectionDialog data={collection} />
       </DropdownMenuContent>
     </DropdownMenu>
   );

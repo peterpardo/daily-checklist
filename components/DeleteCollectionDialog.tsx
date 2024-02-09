@@ -1,5 +1,6 @@
 'use client';
 
+import { deleteCollection } from '@/actions/task';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,13 +14,18 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { Collection } from '@prisma/client';
 import { DropdownMenuItem } from '@radix-ui/react-dropdown-menu';
 import { Loader2, Trash } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import React, { Ref, useState } from 'react';
 
+type DeleteCollectionDialogProps = {
+  data?: Collection | null;
+};
+
 export default React.forwardRef(function DeleteCollectionDialog(
-  props,
+  { data }: DeleteCollectionDialogProps,
   ref: Ref<HTMLDivElement>,
 ) {
   const [isLoading, setIsLoading] = useState(false);
@@ -33,18 +39,13 @@ export default React.forwardRef(function DeleteCollectionDialog(
     e.preventDefault();
     setIsLoading(true);
 
-    await (async () => {
-      return new Promise((resolve, reject) =>
-        setTimeout(() => resolve('resolved'), 1000),
-      );
-    })();
+    await deleteCollection(data?.id);
 
     toast({
       title: 'Collection successfully deleted.',
     });
     setIsOpen(false);
     setIsLoading(false);
-    router.push('/home');
   }
 
   return (

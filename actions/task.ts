@@ -3,6 +3,7 @@
 import prisma from '@/lib/db';
 import { currentUser } from '@clerk/nextjs';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 export async function createCollection(values: { name: string }) {
   try {
@@ -35,8 +36,26 @@ export async function editCollection(
       },
     });
   } catch (error) {
-    throw new Error('Failed to create collection');
+    throw new Error('Failed to edit collection');
   }
 
   revalidatePath(`/home/${collectionId}`);
+}
+
+export async function deleteCollection(collectionId: number | undefined) {
+  try {
+    const user = await currentUser();
+
+    await prisma.collection.delete({
+      where: {
+        id: collectionId,
+        userId: user?.id,
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to delete collection');
+  }
+
+  revalidatePath('/home');
+  redirect('/home');
 }
