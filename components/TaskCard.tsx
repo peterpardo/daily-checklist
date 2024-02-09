@@ -43,7 +43,7 @@ export default function TaskCard({ task, onChange }: TaskCardProps) {
 
         <div className="flex items-center ml-auto mt-1">
           {!task.completed && <TaskDialog data={task} action="EDIT" />}
-          <DeleteTaskDialog />
+          <DeleteTaskDialog data={task} />
         </div>
       </div>
     </Card>

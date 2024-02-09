@@ -78,3 +78,21 @@ export async function editTaskStatus(
 
   revalidatePath(`/home/${collectionId}`);
 }
+
+export async function deleteTask(
+  taskId: number | undefined,
+  collectionId: number | undefined,
+) {
+  try {
+    await prisma.task.delete({
+      where: {
+        id: taskId,
+        collectionId: collectionId,
+      },
+    });
+  } catch (error) {
+    throw new Error('Failed to delete task');
+  }
+
+  revalidatePath(`/home/${collectionId}`);
+}

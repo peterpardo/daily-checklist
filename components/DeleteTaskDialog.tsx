@@ -1,3 +1,4 @@
+import { deleteTask } from '@/actions/tasks';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,10 +12,15 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
+import { Task } from '@prisma/client';
 import { Loader2, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
-export function DeleteTaskDialog() {
+type DeleteTaskDialogProps = {
+  data: Task;
+};
+
+export function DeleteTaskDialog({ data }: DeleteTaskDialogProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const { toast } = useToast();
@@ -25,11 +31,7 @@ export function DeleteTaskDialog() {
     e.preventDefault();
     setIsLoading(true);
 
-    await (async () => {
-      return new Promise((resolve, reject) =>
-        setTimeout(() => resolve('resolved'), 1000),
-      );
-    })();
+    await deleteTask(data.id, data.collectionId);
 
     toast({
       title: 'Task successfully deleted.',
