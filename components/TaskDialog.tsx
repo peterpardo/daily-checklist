@@ -26,7 +26,7 @@ import {
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
 import { Task } from '@prisma/client';
-import { createTask } from '@/actions/tasks';
+import { createTask, editTask } from '@/actions/tasks';
 
 type TaskDialogProps = {
   action?: 'CREATE' | 'EDIT';
@@ -59,10 +59,18 @@ export default function TaskDialog({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    await createTask(values, collectionId);
+    let toastTitle = '';
+
+    if (action === 'CREATE') {
+      await createTask(values, collectionId);
+      toastTitle = 'Task successfully created.';
+    } else {
+      await editTask(values, data?.id);
+      toastTitle = 'Task successfully edited.';
+    }
 
     toast({
-      title: 'Task successfully added.',
+      title: toastTitle,
     });
     setIsOpen(false);
     setIsLoading(false);

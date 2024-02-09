@@ -16,7 +16,11 @@ export default async function CollectionPage({
       userId: user?.id as string,
     },
     include: {
-      tasks: true,
+      tasks: {
+        orderBy: {
+          createdAt: 'asc',
+        },
+      },
     },
   });
 

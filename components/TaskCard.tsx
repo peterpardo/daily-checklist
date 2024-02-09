@@ -22,7 +22,7 @@ export default function TaskCard({ task, onChange }: TaskCardProps) {
       <div className="flex items-start p-2">
         <div className="pl-2 pr-2 pt-3">
           <Checkbox
-            checked={task.completed}
+            checked={task?.completed as boolean}
             onCheckedChange={(value: boolean) => onChange(value, task.id)}
           />
         </div>
