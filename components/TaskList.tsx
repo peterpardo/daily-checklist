@@ -2,7 +2,7 @@
 
 import { Separator } from '@/components/ui/separator';
 import TaskCard from '@/components/TaskCard';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Task } from '@prisma/client';
 
 type TaskListProps = {
@@ -19,6 +19,10 @@ export default function TaskList({ data }: TaskListProps) {
     () => tasks?.filter((task) => !task.completed),
     [tasks],
   );
+
+  useEffect(() => {
+    setTasks(data);
+  }, [data]);
 
   const handleTaskStatusChange = (value: boolean, id: number) => {
     const currentTasks = [...(tasks || [])];

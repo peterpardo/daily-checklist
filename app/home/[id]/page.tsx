@@ -27,7 +27,7 @@ export default async function CollectionPage({
           <h1 className="font-bold text-xl md:text-4xl">{collection?.name}</h1>
           <CollectionMenu collectionId={params.id} />
         </div>
-        <TaskDialog />
+        <TaskDialog collectionId={params.id} />
       </div>
 
       <TaskList data={collection?.tasks} />

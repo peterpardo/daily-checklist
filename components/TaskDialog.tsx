@@ -26,20 +26,23 @@ import {
 import { useToast } from '@/components/ui/use-toast';
 import { useState } from 'react';
 import { Task } from '@prisma/client';
+import { createTask } from '@/actions/tasks';
 
 type TaskDialogProps = {
   action?: 'CREATE' | 'EDIT';
   data?: Task | null;
+  collectionId?: string;
 };
 
 const formSchema = z.object({
   title: z.string().min(2).max(30),
-  description: z.string().min(2).max(50),
+  description: z.string().max(50),
 });
 
 export default function TaskDialog({
   action = 'CREATE',
   data = null,
+  collectionId,
 }: TaskDialogProps) {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -56,13 +59,8 @@ export default function TaskDialog({
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsLoading(true);
 
-    await (async () => {
-      return new Promise((resolve, reject) =>
-        setTimeout(() => resolve('resolved'), 1000),
-      );
-    })();
+    await createTask(values, collectionId);
 
- 
     toast({
       title: 'Task successfully added.',
     });
