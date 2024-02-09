@@ -72,6 +72,7 @@ export default function TaskDialog({
     toast({
       title: toastTitle,
     });
+    form.reset();
     setIsOpen(false);
     setIsLoading(false);
   }
