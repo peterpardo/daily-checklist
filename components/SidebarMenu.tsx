@@ -14,7 +14,7 @@ export default function SidebarMenu() {
         <Link
           key={i}
           href={item.link}
-          className={`flex items-center gap-x-2 text-sm w-full px-4 py-2 rounded hover:bg-accent hover:text-accent-foreground ${
+          className={`flex items-center gap-x-2 text-sm w-full px-4 py-2 rounded font-semibold hover:bg-accent hover:text-accent-foreground ${
             path === item.link ? 'bg-accent' : ''
           }  `}
         >
