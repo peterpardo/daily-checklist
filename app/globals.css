@@ -255,7 +255,7 @@
   --ring: 142.4 71.8% 29.2%;
 }
 
-.theme-green {
+.theme-orange {
   --background: 0 0% 100%;
   --foreground: 20 14.3% 4.1%;
   --card: 0 0% 100%;
@@ -278,7 +278,7 @@
   --radius: 0.5rem;
 }
 
-.dark .theme-green {
+.dark .theme-orange {
   --background: 20 14.3% 4.1%;
   --foreground: 60 9.1% 97.8%;
   --card: 20 14.3% 4.1%;

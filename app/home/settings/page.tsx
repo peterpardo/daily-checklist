@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import React from 'react';
+import React, { useState } from 'react';
 import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -24,6 +24,8 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Button } from '@/components/ui/button';
+import { updateUserTheme } from '@/actions/user';
+import { Loader2 } from 'lucide-react';
 
 const formSchema = z.object({
   theme: z.string({
@@ -37,19 +39,21 @@ export default function SettingsPage() {
     resolver: zodResolver(formSchema),
   });
   const { toast } = useToast();
+  const [isLoading, setIsLoading] = useState(false);
   const emailData = user?.emailAddresses.find(
     (email) => email.id === user.primaryEmailAddressId,
   );
 
-  function onSubmit(data: z.infer<typeof formSchema>) {
+  async function onSubmit(data: z.infer<typeof formSchema>) {
+    setIsLoading(true);
+
+    await updateUserTheme(data);
+
     toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+      title: 'Changes saved successfully.',
     });
+
+    setIsLoading(false);
   }
 
   return (
@@ -94,11 +98,11 @@ export default function SettingsPage() {
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent>
-                        <SelectItem value="apple">Apple</SelectItem>
-                        <SelectItem value="banana">Banana</SelectItem>
-                        <SelectItem value="blueberry">Blueberry</SelectItem>
-                        <SelectItem value="grapes">Grapes</SelectItem>
-                        <SelectItem value="pineapple">Pineapple</SelectItem>
+                        <SelectItem value="zinc">Zinc</SelectItem>
+                        <SelectItem value="rose">Rose</SelectItem>
+                        <SelectItem value="blue">Blue</SelectItem>
+                        <SelectItem value="green">Green</SelectItem>
+                        <SelectItem value="orange">Orange</SelectItem>
                       </SelectContent>
                     </Select>
 
@@ -108,7 +112,12 @@ export default function SettingsPage() {
               />
 
               <div className="mt-5 flex justify-end">
-                <Button type="submit">Submit</Button>
+                <Button type="submit" disabled={isLoading}>
+                  {isLoading && (
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  )}
+                  {isLoading ? 'Saving...' : 'Save'}
+                </Button>
               </div>
             </form>
           </Form>
