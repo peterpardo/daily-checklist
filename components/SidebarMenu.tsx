@@ -18,7 +18,7 @@ export default function SidebarMenu() {
             path === item.link ? 'bg-accent' : ''
           }  `}
         >
-          <item.icon size={18} />
+          <item.icon size={18} className="text-primary" />
           <span>{item.name}</span>
         </Link>
       ))}

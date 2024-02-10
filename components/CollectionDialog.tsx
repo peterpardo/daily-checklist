@@ -85,7 +85,7 @@ export default React.forwardRef(function CollectionDialog(
     <Dialog onOpenChange={handleDialogChange} open={isOpen}>
       <DialogTrigger asChild>
         {isCreate ? (
-          <Button variant="secondary">
+          <Button>
             <FolderPlus size={20} className="mr-2" />
             <span className="text-xs md:text-base">New Collection</span>
           </Button>

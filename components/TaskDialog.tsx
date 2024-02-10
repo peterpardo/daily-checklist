@@ -88,7 +88,7 @@ export default function TaskDialog({
     <Dialog onOpenChange={handleDialogChange} open={isOpen}>
       <DialogTrigger asChild>
         {isCreate ? (
-          <Button variant="secondary">
+          <Button>
             <Plus size={20} className="mr-2" />
             <span className="text-xs md:text-base">Add Task</span>
           </Button>

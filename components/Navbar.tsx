@@ -12,7 +12,7 @@ export default async function Navbar() {
     <nav className="w-full border-b px-2 py-4">
       <div className="container flex items-center justify-between">
         <Link href="/" className="font-bold text-xl">
-          DailyChecklist
+          Daily<span className="text-primary">Checklist</span>
         </Link>
         <div className="flex items-center gap-x-5">
           <ThemeToggle />

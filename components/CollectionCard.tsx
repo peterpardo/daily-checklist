@@ -23,7 +23,7 @@ export default function CollectionCard({ collection }: CollectionCardProps) {
           </CardHeader>
 
           <div className="p-6">
-            <ArrowRight />
+            <ArrowRight className='text-primary'/>
           </div>
         </div>
       </Card>
