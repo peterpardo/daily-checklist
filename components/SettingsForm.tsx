@@ -44,6 +44,7 @@ export default function SettingsForm({ data }: SettingsFormProps) {
   });
   const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
+  const [isChanged, setIsChanged] = useState(false);
 
   async function onSubmit(data: z.infer<typeof formSchema>) {
     setIsLoading(true);
@@ -55,6 +56,7 @@ export default function SettingsForm({ data }: SettingsFormProps) {
     });
 
     setIsLoading(false);
+    setIsChanged(false);
   }
 
   return (
@@ -68,7 +70,10 @@ export default function SettingsForm({ data }: SettingsFormProps) {
               <FormItem>
                 <FormLabel>Theme</FormLabel>
                 <Select
-                  onValueChange={field.onChange}
+                  onValueChange={(value) => {
+                    field.onChange(value);
+                    setIsChanged(value !== data?.theme);
+                  }}
                   defaultValue={field.value}
                 >
                   <FormControl>
@@ -91,7 +96,7 @@ export default function SettingsForm({ data }: SettingsFormProps) {
           />
 
           <div className="mt-5 flex justify-end">
-            <Button type="submit" disabled={isLoading}>
+            <Button type="submit" disabled={isLoading || !isChanged}>
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isLoading ? 'Saving...' : 'Save'}
             </Button>
