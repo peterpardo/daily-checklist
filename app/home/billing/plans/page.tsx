@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import { CheckCircle2 } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -12,9 +13,15 @@ export default function PlansPage() {
           <div className="space-y-3">
             <h1 className="text-3xl">Free Plan</h1>
             <p className="font-semibold">Free</p>
-            <ul className="list-disc list-inside">
-              <li>Create your Collections - Max of 5 collections</li>
-              <li>Create your own Tasks - Max of 10 tasks per collection</li>
+            <ul className="list-inside space-y-2">
+              <li className="flex items-center gap-x-2">
+                <CheckCircle2 />
+                Create your Collections - Max of 5 collections
+              </li>
+              <li className="flex items-center gap-x-2">
+                <CheckCircle2 />
+                Create your own Tasks - Max of 10 tasks per collection
+              </li>
             </ul>
           </div>
           <div className="flex items-center justify-end w-full">
@@ -28,10 +35,17 @@ export default function PlansPage() {
             <h1 className="text-3xl">Premium Plan</h1>
             <p className="font-semibold">$2.99 per month</p>
             <p>Including all benefits of the free plan plus:</p>
-            <ul className="list-disc list-inside">
-              <li>Can create max of 15 collections</li>
-              <li>Can create max of 30 task per collection</li>
-              <li>
+            <ul className="list-inside space-y-2">
+              <li className="flex items-center gap-x-2">
+                <CheckCircle2 />
+                Can create max of 15 collections
+              </li>
+              <li className="flex items-center gap-x-2">
+                <CheckCircle2 />
+                Can create max of 30 task per collection
+              </li>
+              <li className="flex items-center gap-x-2">
+                <CheckCircle2 />
                 <span className="font-semibold">Reset tasks</span> feature is
                 enabled
               </li>
