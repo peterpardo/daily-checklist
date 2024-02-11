@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button';
+import Link from 'next/link';
 import React from 'react';
 
 export default function BillingPage() {
@@ -17,7 +18,9 @@ export default function BillingPage() {
           <p>- Free plan</p>
         </div>
 
-        <Button>Change Plan</Button>
+        <Button variant="default" asChild>
+          <Link href="/home/billing/plans">Change Plan</Link>
+        </Button>
       </div>
     </div>
   );
